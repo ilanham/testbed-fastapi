@@ -25,3 +25,8 @@ app.add_middleware(
 )
 
 app.include_router(items.router, prefix="/api/items", tags=["items"])
+
+
+@app.get("/health", tags=["health"])
+async def health():
+    return {"status": "ok"}

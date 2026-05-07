@@ -1,38 +1,47 @@
 const BASE = '/api/items'
 
+async function request(url, options = {}) {
+  let res
+  try {
+    res = await fetch(url, options)
+  } catch (e) {
+    throw new Error(`Network error — could not reach the API. (${e.message})`)
+  }
+  if (!res.ok) {
+    const body = await res.text().catch(() => '(no response body)')
+    throw new Error(`HTTP ${res.status} ${res.statusText}: ${body}`)
+  }
+  return res
+}
+
 export async function fetchItems() {
-  const res = await fetch(BASE)
-  if (!res.ok) throw new Error(await res.text())
+  const res = await request(`${BASE}/`)
   return res.json()
 }
 
 export async function fetchItem(id) {
-  const res = await fetch(`${BASE}/${id}`)
-  if (!res.ok) throw new Error(await res.text())
+  const res = await request(`${BASE}/${id}`)
   return res.json()
 }
 
 export async function createItem(payload) {
-  const res = await fetch(BASE, {
+  const res = await request(`${BASE}/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   })
-  if (!res.ok) throw new Error(await res.text())
   return res.json()
 }
 
 export async function updateItem(id, payload) {
-  const res = await fetch(`${BASE}/${id}`, {
+  const res = await request(`${BASE}/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   })
-  if (!res.ok) throw new Error(await res.text())
   return res.json()
 }
 
 export async function deleteItem(id) {
-  const res = await fetch(`${BASE}/${id}`, { method: 'DELETE' })
-  if (!res.ok) throw new Error(await res.text())
+  await request(`${BASE}/${id}`, { method: 'DELETE' })
 }
