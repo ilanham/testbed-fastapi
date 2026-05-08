@@ -82,7 +82,9 @@ generating code for that layer.
 | FastAPI routers / app factory | `.claude/skills/fastapi/SKILL.md`       |
 | SQLAlchemy models / sessions  | `.claude/skills/sqlalchemy-sqlite/SKILL.md` |
 | PyTest fixtures / test cases  | `.claude/skills/pytest/SKILL.md`        |
-| React components / pages      | `.claude/skills/reactjs/SKILL.md`       |
+| Any React frontend work       | `.claude/skills/react-router/SKILL.md` → routes to ↓ |
+| React (TypeScript project)    | `.claude/skills/reactjs-ts/SKILL.md`    |
+| React (plain JS project)      | `.claude/skills/reactjs-js/SKILL.md`    |
 | API contract / integration    | `.claude/skills/fullstack-integration/SKILL.md` |
 
 ---
